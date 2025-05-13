@@ -58,3 +58,4 @@ $string['privacy:null_reason'] = 'The checklist grade export generates exports u
 
 $string['startdate'] = 'Start date';
 $string['wrongdistrict'] = 'You do not have permission to view reports from that district';
+$string['lecturer_signature'] = 'Lecturer signature';

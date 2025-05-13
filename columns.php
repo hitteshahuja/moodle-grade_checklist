@@ -34,10 +34,11 @@ defined('MOODLE_INTERNAL') || die();
 $checklistexportusercolumns = [
     'lastname' => get_string('lastname'),
     'firstname' => get_string('firstname'),
-    'username' => get_string('username'),
+    // 'username' => get_string('username'),
     '_groups' => 'Groups(s)',
-    '_enroldate' => get_string('enroldate', 'gradeexport_checklist'),
-    '_startdate' => get_string('startdate', 'gradeexport_checklist'),
+    // '_enroldate' => get_string('enroldate', 'gradeexport_checklist'),
+    // '_startdate' => get_string('startdate', 'gradeexport_checklist'),
+    '_lecturer_signature' => get_string('lecturer_signature', 'gradeexport_checklist'),
     '_percent' => get_string('percent', 'gradeexport_checklist'), // Percentage of items student has completed.
 ];
 
