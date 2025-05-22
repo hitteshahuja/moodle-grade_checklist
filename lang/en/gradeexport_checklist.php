@@ -41,6 +41,8 @@ $string['enroldate'] = 'Enrol date';
 $string['export'] = 'Export Excel file';
 $string['exportoptional'] = 'Include optional items';
 
+$string['lecturer_signature'] = 'Lecturer signature';
+
 $string['nochecklists'] = 'No suitable checklists found';
 $string['nodistrict'] = 'Error: current user has no district';
 $string['nopermission'] = 'You do not have permission to do this export';
@@ -58,4 +60,3 @@ $string['privacy:null_reason'] = 'The checklist grade export generates exports u
 
 $string['startdate'] = 'Start date';
 $string['wrongdistrict'] = 'You do not have permission to view reports from that district';
-$string['lecturer_signature'] = 'Lecturer signature';

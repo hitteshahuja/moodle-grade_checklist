@@ -297,7 +297,7 @@ foreach ($users as $user) {
        SELECT i.id, i.itemoptional, c.usertimestamp, c.teachermark
          FROM {checklist_item} i
          LEFT JOIN (
-             SELECT ch.item, ch.usertimestamp, ch.teachermark
+             SELECT ch.item, ch.usertimestamp, ch.teachermark,ch.teacherid
                FROM {checklist_check} ch
               WHERE ch.userid = ?
          ) c ON c.item = i.id
@@ -349,7 +349,7 @@ foreach ($users as $user) {
                     if ($check->itemoptional == CHECKLIST_OPTIONAL_HEADING) {
                         continue;
                     }
-                    if ($check->teachermark == CHECKLIST_TEACHERMARK_YES) {
+                    if ($check->teachermark == CHECKLIST_TEACHERMARK_YES && $check->teacherid) {
                         $lecturer = fullname($DB->get_record('user', ['id' => $check->teacherid]));
                         break;
                     }
