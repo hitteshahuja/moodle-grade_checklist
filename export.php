@@ -84,8 +84,16 @@ $teachermarking = ($checklist->teacheredit != CHECKLIST_MARKING_STUDENT);
 
 $strchecklistreport = get_string('checklistreport', 'gradeexport_checklist');
 
-$users = get_users_by_capability($context, 'mod/checklist:updateown', 'u.*', 'u.firstname, u.lastname', '', '', $group,
-    false);
+$users = get_users_by_capability(
+    $context,
+    'mod/checklist:updateown',
+    'u.*',
+    'u.firstname, u.lastname',
+    '',
+    '',
+    $group,
+    false
+);
 
 if ($district && $district !== 'ALL' && $users) {
     [$usql, $uparam] = $DB->get_in_or_equal(array_keys($users));
@@ -112,19 +120,22 @@ if (defined('BEHAT_SITE_RUNNING')) {
     /**
      * Class FakeMoodleExcelWorkbook
      */
-    class FakeMoodleExcelWorkbook {
+    class FakeMoodleExcelWorkbook
+    {
         /**
          * FakeMoodleExcelWorkbook constructor.
          * @param mixed $ignore
          */
-        public function __construct($ignore) {
+        public function __construct($ignore)
+        {
         }
 
         /**
          * Send the finished spreadsheet
          * @param mixed $ignore
          */
-        public function send($ignore) {
+        public function send($ignore)
+        {
         }
 
         /**
@@ -133,7 +144,8 @@ if (defined('BEHAT_SITE_RUNNING')) {
          * @param int $col
          * @param string $data
          */
-        public function write_string($row, $col, $data) {
+        public function write_string($row, $col, $data)
+        {
             echo "($row, $col) = $data<br/>";
         }
 
@@ -143,7 +155,8 @@ if (defined('BEHAT_SITE_RUNNING')) {
          * @param int $col
          * @param string $data
          */
-        public function write_number($row, $col, $data) {
+        public function write_number($row, $col, $data)
+        {
             echo "($row, $col) = $data<br/>";
         }
 
@@ -152,14 +165,16 @@ if (defined('BEHAT_SITE_RUNNING')) {
          * @param mixed $ignore
          * @return FakeMoodleExcelWorkbook
          */
-        public function add_worksheet($ignore) {
+        public function add_worksheet($ignore)
+        {
             return new FakeMoodleExcelWorkbook($ignore);
         }
 
         /**
          * Close the workbook
          */
-        public function close() {
+        public function close()
+        {
         }
     }
 }
@@ -173,7 +188,8 @@ if (defined('BEHAT_SITE_RUNNING')) {
  * @param array $extra
  * @param string $element
  */
-function safe_write_string($myxls, $row, $col, $user, $extra, $element) {
+function safe_write_string($myxls, $row, $col, $user, $extra, $element)
+{
     if (isset($user[$element])) {
         $myxls->write_string($row, $col, $user[$element]);
     } else if (isset($extra[$element])) {
@@ -217,9 +233,12 @@ if ($percentheadings) {
     }
 }
 
-$items = $DB->get_records_select('checklist_item',
+$items = $DB->get_records_select(
+    'checklist_item',
     "checklist = ? AND userid = 0 $itemoptional AND hidden = 0",
-    [$checklist->id], 'position');
+    [$checklist->id],
+    'position'
+);
 if ($items) {
     $parentitem = 0;
     foreach ($items as $item) {
@@ -294,7 +313,7 @@ foreach ($users as $user) {
     $col = 0;
 
     $sql = "
-       SELECT i.id, i.itemoptional, c.usertimestamp, c.teachermark
+       SELECT i.id, i.itemoptional, c.usertimestamp, c.teachermark, c.teacherid
          FROM {checklist_item} i
          LEFT JOIN (
              SELECT ch.item, ch.usertimestamp, ch.teachermark,ch.teacherid
@@ -332,8 +351,10 @@ foreach ($users as $user) {
             if ($reader) {
                 $tablename = $reader->get_internal_log_table_name();
                 $cond = [
-                    'userid' => $user->id, 'courseid' => $course->id,
-                    'target' => 'course', 'action' => 'viewed',
+                    'userid' => $user->id,
+                    'courseid' => $course->id,
+                    'target' => 'course',
+                    'action' => 'viewed',
                 ];
                 $firstview = $DB->get_field($tablename, 'MIN(timecreated)', $cond);
             }
